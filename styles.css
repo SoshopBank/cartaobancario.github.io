@@ -2,7 +2,7 @@ body {
   font-family: Arial, sans-serif;
   margin: 0;
   padding: 0;
-  background-image: url('background-image.jpg'); /* Remplacer 'background-image.jpg' par le chemin d'accès à votre image de fond */
+  background-image: url('background-image.png'); /* Remplacer 'background-image.jpg' par le chemin d'accès à votre image de fond */
   background-size: cover;
   background-position: center;
 }
