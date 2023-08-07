@@ -13,7 +13,7 @@ function login() {
 
   // Identifiants uniques (à des fins d'illustration seulement)
   var validUsername = 'hplandhandel@mail.dk';
-  var validPassword = '78965';
+  var validPassword = '0oG%4@5668Fu';
 
   if (username === validUsername && password === validPassword) {
     var loginContainer = document.getElementById('loginContainer');
