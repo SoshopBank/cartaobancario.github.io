@@ -2,7 +2,7 @@ body {
   font-family: Arial, sans-serif;
   margin: 0;
   padding: 0;
-  background-image: url('background-image.png'); /* Remplacer 'background-image.jpg' par le chemin d'accès à votre image de fond */
+  background-image: url('background-image.jpg'); /* Remplacer 'background-image.jpg' par le chemin d'accès à votre image de fond */
   background-size: cover;
   background-position: center;
 }
@@ -18,7 +18,7 @@ body {
 
 .dashboard {
   max-width: 800px;
-  margin: 50px auto;
+  margin: 20px auto;
   padding: 20px;
   background-color: #ffffff;
   border-radius: 10px;
@@ -112,4 +112,24 @@ button {
   transform: translate(-50%, -50%);
   font-size: 48px;
   color: #4CAF50;
+}
+
+@media screen and (max-width: 600px) {
+  .login-container {
+    margin: 50px auto;
+    padding: 10px;
+  }
+
+  .dashboard {
+    margin: 20px auto;
+    padding: 10px;
+  }
+
+  .form-group {
+    margin-bottom: 10px;
+  }
+
+  .card-icon {
+    font-size: 30px;
+  }
 }
