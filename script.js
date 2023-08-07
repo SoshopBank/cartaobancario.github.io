@@ -15,7 +15,7 @@ function login() {
   var validPassword = 'secret';
 
   if (username === validUsername && password === validPassword) {
-    var loginContainer = document.querySelector('.login-container');
+    var loginContainer = document.getElementById('loginContainer');
     var dashboard = document.getElementById('dashboard');
     loginContainer.style.display = 'none';
     dashboard.style.display = 'block';
@@ -25,23 +25,6 @@ function login() {
     document.getElementById('cardnumber').textContent = cardDetails.cardnumber;
     document.getElementById('expiration').textContent = cardDetails.expiration;
     document.getElementById('securitycode').textContent = cardDetails.securitycode;
-
-    // Vérifier si les informations saisies correspondent aux informations prédéfinies
-    var enteredCardholder = document.getElementById('enteredCardholder').value;
-    var enteredCardnumber = document.getElementById('enteredCardnumber').value;
-    var enteredExpiration = document.getElementById('enteredExpiration').value;
-    var enteredSecuritycode = document.getElementById('enteredSecuritycode').value;
-
-    if (
-      enteredCardholder === cardDetails.cardholder &&
-      enteredCardnumber === cardDetails.cardnumber &&
-      enteredExpiration === cardDetails.expiration &&
-      enteredSecuritycode === cardDetails.securitycode
-    ) {
-      document.getElementById('transferButton').style.display = 'block';
-    } else {
-      document.getElementById('transferButton').style.display = 'none';
-    }
   } else {
     alert('Identifiants invalides. Veuillez réessayer.');
   }
