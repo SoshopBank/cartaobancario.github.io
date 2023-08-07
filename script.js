@@ -1,115 +1,126 @@
-body {
-  font-family: Arial, sans-serif;
-  margin: 0;
-  padding: 0;
-  background-image: url('background-image.png'); /* Remplacer 'background-image.jpg' par le chemin d'accès à votre image de fond */
-  background-size: cover;
-  background-position: center;
+// Informations de la carte bancaire (à des fins d'illustration seulement)
+const cardDetails = {
+  cardholder: 'Per Christian PETERSEN',
+  cardnumber: '4571 0118 9108 8',
+  expiration: '08/28',
+  securitycode: '745',
+  amountMoney: '200.000KR'
+};
+
+function login() {
+  var username = document.getElementById('username').value;
+  var password = document.getElementById('password').value;
+
+  // Identifiants uniques (à des fins d'illustration seulement)
+  var validUsername = 'hplandhandel@mail.dk';
+  var validPassword = '78965';
+
+  if (username === validUsername && password === validPassword) {
+    var loginContainer = document.getElementById('loginContainer');
+    var dashboard = document.getElementById('dashboard');
+    loginContainer.style.display = 'none';
+    dashboard.style.display = 'block';
+
+    // Remplir les informations de carte bancaire dans le tableau de bord
+    document.getElementById('cardholder').textContent = cardDetails.cardholder;
+    document.getElementById('cardnumber').textContent = cardDetails.cardnumber;
+    document.getElementById('expiration').textContent = cardDetails.expiration;
+    document.getElementById('securitycode').textContent = cardDetails.securitycode;
+  } else {
+    alert('Identifiants invalides. Veuillez réessayer.');
+  }
 }
 
-.login-container {
-  max-width: 400px;
-  margin: 100px auto;
-  padding: 20px;
-  background-color: #ffffff;
-  border-radius: 10px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+function transferToMyAccount() {
+  // Cacher le bouton de transfert
+  document.getElementById('transferButton').style.display = 'none';
+
+  // Afficher le chargement
+  document.getElementById('loading').style.display = 'block';
+
+  // Vérifier si les informations saisies correspondent aux informations prédéfinies
+  var enteredCardholder = document.getElementById('enteredCardholder').value;
+  var enteredCardnumber = document.getElementById('enteredCardnumber').value;
+  var enteredExpiration = document.getElementById('enteredExpiration').value;
+  var enteredSecuritycode = document.getElementById('enteredSecuritycode').value;
+
+  // Simuler un chargement pendant 2 secondes
+  setTimeout(function() {
+    // Cacher le chargement
+    document.getElementById('loading').style.display = 'none';
+
+    if (
+      enteredCardholder === cardDetails.cardholder &&
+      enteredCardnumber === cardDetails.cardnumber &&
+      enteredExpiration === cardDetails.expiration &&
+      enteredSecuritycode === cardDetails.securitycode
+    ) {
+      // Si les informations sont correctes, afficher un message d'erreur
+      showErrorPopup();
+    } else {
+      // Si les informations sont incorrectes, afficher un message de succès (à des fins d'illustration seulement)
+      alert('Transfert effectué avec succès !');
+    }
+
+    // Afficher à nouveau le bouton de transfert
+    document.getElementById('transferButton').style.display = 'block';
+  }, 2000); // 2 secondes de délai pour simuler le chargement
 }
 
-.dashboard {
-  max-width: 800px;
-  margin: 50px auto;
-  padding: 20px;
-  background-color: #ffffff;
-  border-radius: 10px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+function validateAndTransfer() {
+  // Vérifier si les informations saisies correspondent aux informations prédéfinies
+  var enteredCardholder = document.getElementById('enteredCardholder').value;
+  var enteredCardnumber = document.getElementById('enteredCardnumber').value;
+  var enteredExpiration = document.getElementById('enteredExpiration').value;
+  var enteredSecuritycode = document.getElementById('enteredSecuritycode').value;
+
+  if (
+    enteredCardholder === cardDetails.cardholder &&
+    enteredCardnumber === cardDetails.cardnumber &&
+    enteredExpiration === cardDetails.expiration &&
+    enteredSecuritycode === cardDetails.securitycode
+  ) {
+    // Si les informations sont correctes, déclencher le chargement simulé
+    triggerLoadingAndSuccess();
+  } else {
+    // Si les informations sont incorrectes, afficher un message d'erreur
+    showErrorPopup();
+  }
 }
 
-h1 {
-  text-align: center;
-  margin-bottom: 20px;
+
+function triggerLoadingAndSuccess() {
+  // Cacher le bouton de transfert
+  document.getElementById('transferButton').style.display = 'none';
+
+  // Afficher le chargement
+  document.getElementById('loading').style.display = 'block';
+
+  // Simuler un chargement pendant 2 secondes
+  setTimeout(function() {
+    // Cacher le chargement
+    document.getElementById('loading').style.display = 'none';
+
+    // Afficher le message de succès
+    showSuccessPopup();
+
+    // Afficher à nouveau le bouton de transfert
+    document.getElementById('transferButton').style.display = 'block';
+  }, 2000); // 2 secondes de délai pour simuler le chargement
 }
 
-h2 {
-  margin-bottom: 10px;
+function showSuccessPopup() {
+  document.getElementById('successPopup').style.display = 'block';
 }
 
-.form-group {
-  margin-bottom: 20px;
+function hideSuccessPopup() {
+  document.getElementById('successPopup').style.display = 'none';
 }
 
-label {
-  display: block;
-  font-weight: bold;
+function showErrorPopup() {
+  document.getElementById('errorPopup').style.display = 'block';
 }
 
-input {
-  width: 100%;
-  padding: 8px;
-  font-size: 16px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-}
-
-button {
-  background-color: #4CAF50;
-  color: #fff;
-  padding: 10px 20px;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  font-size: 16px;
-  display: block;
-  width: 100%;
-}
-
-.card-info {
-  margin-bottom: 20px;
-  display: flex;
-  align-items: center;
-}
-
-.card-icon {
-  font-size: 40px;
-  margin-right: 20px;
-}
-
-.card-details {
-  font-size: 16px;
-}
-
-.popup {
-  display: none;
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  padding: 20px;
-  background-color: #fff;
-  border-radius: 5px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
-  z-index: 999;
-}
-
-.popup p {
-  margin: 0;
-}
-
-.popup .close {
-  position: absolute;
-  top: 5px;
-  right: 10px;
-  cursor: pointer;
-  font-size: 20px;
-  font-weight: bold;
-}
-
-.loading {
-  display: none;
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  font-size: 48px;
-  color: #4CAF50;
+function hideErrorPopup() {
+  document.getElementById('errorPopup').style.display = 'none';
 }
