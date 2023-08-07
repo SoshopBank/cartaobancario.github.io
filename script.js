@@ -1,44 +1,115 @@
-// Informations de la carte bancaire (à des fins d'illustration seulement)
-const cardDetails = {
-  cardholder: 'John Doe',
-  cardnumber: '1234 5678 9012 3456',
-  expiration: '12/24',
-  securitycode: '123',
-};
-
-function login() {
-  var username = document.getElementById('username').value;
-  var password = document.getElementById('password').value;
-
-  // Identifiants uniques (à des fins d'illustration seulement)
-  var validUsername = 'john_doe';
-  var validPassword = 'secret';
-
-  if (username === validUsername && password === validPassword) {
-    var loginContainer = document.getElementById('loginContainer');
-    var dashboard = document.getElementById('dashboard');
-    loginContainer.style.display = 'none';
-    dashboard.style.display = 'block';
-
-    // Remplir les informations de carte bancaire dans le tableau de bord
-    document.getElementById('cardholder').textContent = cardDetails.cardholder;
-    document.getElementById('cardnumber').textContent = cardDetails.cardnumber;
-    document.getElementById('expiration').textContent = cardDetails.expiration;
-    document.getElementById('securitycode').textContent = cardDetails.securitycode;
-  } else {
-    alert('Identifiants invalides. Veuillez réessayer.');
-  }
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  background-image: url('background-image.png'); /* Remplacer 'background-image.jpg' par le chemin d'accès à votre image de fond */
+  background-size: cover;
+  background-position: center;
 }
 
-function showErrorPopup() {
-  // Afficher le popup d'erreur seulement si le bouton de transfert est visible
-  if (document.getElementById('transferButton').style.display === 'block') {
-    var popup = document.getElementById('errorPopup');
-    popup.style.display = 'block';
-  }
+.login-container {
+  max-width: 400px;
+  margin: 100px auto;
+  padding: 20px;
+  background-color: #ffffff;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
-function hideErrorPopup() {
-  var popup = document.getElementById('errorPopup');
-  popup.style.display = 'none';
+.dashboard {
+  max-width: 800px;
+  margin: 50px auto;
+  padding: 20px;
+  background-color: #ffffff;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+h2 {
+  margin-bottom: 10px;
+}
+
+.form-group {
+  margin-bottom: 20px;
+}
+
+label {
+  display: block;
+  font-weight: bold;
+}
+
+input {
+  width: 100%;
+  padding: 8px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+button {
+  background-color: #4CAF50;
+  color: #fff;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  display: block;
+  width: 100%;
+}
+
+.card-info {
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+}
+
+.card-icon {
+  font-size: 40px;
+  margin-right: 20px;
+}
+
+.card-details {
+  font-size: 16px;
+}
+
+.popup {
+  display: none;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  padding: 20px;
+  background-color: #fff;
+  border-radius: 5px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+  z-index: 999;
+}
+
+.popup p {
+  margin: 0;
+}
+
+.popup .close {
+  position: absolute;
+  top: 5px;
+  right: 10px;
+  cursor: pointer;
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.loading {
+  display: none;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 48px;
+  color: #4CAF50;
 }
