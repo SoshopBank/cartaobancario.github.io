@@ -2,7 +2,9 @@ body {
   font-family: Arial, sans-serif;
   margin: 0;
   padding: 0;
-  background-color: #f0f0f0;
+  background-image: url('background-image.jpg'); /* Remplacer 'background-image.jpg' par le chemin d'accès à votre image de fond */
+  background-size: cover;
+  background-position: center;
 }
 
 .login-container {
@@ -67,9 +69,8 @@ button {
   align-items: center;
 }
 
-.card-info img {
-  width: 100px;
-  height: auto;
+.card-icon {
+  font-size: 40px;
   margin-right: 20px;
 }
 
