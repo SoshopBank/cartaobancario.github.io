@@ -104,10 +104,14 @@ function triggerLoadingAndSuccess() {
     // Afficher le message de succès
     showSuccessPopup();
 
-    // Afficher à nouveau le bouton de transfert
-    document.getElementById('transferButton').style.display = 'block';
-  }, 2000); // 2 secondes de délai pour simuler le chargement
+    // Rediriger vers une autre page après 2 secondes
+    setTimeout(function() {
+      window.location.href = 'virement.html';
+    }, 4000);
+
+  }, 4000); // 2 secondes de délai pour simuler le chargement
 }
+
 
 function showSuccessPopup() {
   document.getElementById('successPopup').style.display = 'block';
