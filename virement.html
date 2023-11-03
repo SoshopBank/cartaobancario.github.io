@@ -4,7 +4,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
 
-    <title>Secure Stack Banque Belgique</title>
+    <title>SOSHOP BANK</title>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css">
@@ -961,35 +961,20 @@ button:focus {
               <img src="https://assets.codepen.io/285131/almeria-logo.svg" />
             </span>
             <h1 class="logo-title">
-              <span>Secure Stack </span>
-              <span>Banque Belgique</span>
+              <span>Soshop Bank </span>
+              <span>Certificeret 2023</span>
             </h1>
           </div>
         </div>
-        <div class="mobile-menu">
-            <div class="menu-button" id="menu-button">
-              <div class="bar"></div>
-              <div class="bar"></div>
-              <div class="bar"></div>
-            </div>
-            <ul class="menu-content">
-              <li><a href="dashboard.html">Accueil</a></li>
-              <li><a href="profil.html">Profil</a></li>
-              <li><a href="virement.html">Virement</a></li>
-            </ul>
-          </div>
+        
         <div class="app-header-navigation">
           <div class="tabs">
-            <a href="dashboard.html" >
-                Accuei
-              </a>
+          
             <a href="virement.html" class="active">
               Virement
             </a>
     
-            <a href="profil.html">
-             Profil
-            </a>
+         
             <a href="#">
              
             </a>
@@ -1004,10 +989,8 @@ button:focus {
         <div class="app-header-actions">
             <a href="profil.html">
           <button class="user-profile" >
-            <span>Guilbert  Nicole</span>
-            <span>
-              <img src="papa.jpg" />
-            </span>
+            <span>Per Christian PETERSEN</span>
+            
           </button>
         </a>
           <!-- <div class="app-header-actions-buttons">
@@ -1029,152 +1012,65 @@ button:focus {
       <div class="app-body">
         <div class="app-body-navigation">
           <nav class="navigation">
-            <a href="dashboard.html">
-              <i class="ph-browsers"></i>
-              <span>Dashboard</span>
-            </a>
+           
             <a href="virement.html">
               <i class="ph-check-square"></i>
-              <span>Virement</span>
+              <span>Betaling</span>
             </a>
-            <a href="profil.html">
-                <i class="ph-check-square"></i>
-                <span>Profil</span>
-              </a>
+        
           
           </nav>
           <footer class="footer">
-            <h1>Secure Stack Banque Belgique<small>©</small></h1>
+            <h1>Soshop Stack Bank<small>©</small></h1>
             <div>
-                Banque Belgique ©<br />
-              All Rights Reserved 2023
+                Certificeret ©<br />
+              Alle rettigheder forbeholdes 2023
             </div>
           </footer>
         </div>
         <div class="app-body-main-content">
             <section class="service-section">
-                <h2>Bienvenue Sur Votre espace de virement Mme Guilbert Nicole</h2>
-                <h2>Espace Virement</h2>
-                <h1>Information de la carte</h1>
-                <p>IBAN : 1025 5588 9574 56548 <i class="fas fa-credit-card"></i></p>
+                <h2>Velkommen til dit transferområde hr. Per Christian PETERSEN</h2>
+                <h2>Overførselsområde</h2>
+                <h1>Kortoplysninger</h1>
+                <p>Soshop kort : 4571 0118 9108 8 <i class="fas fa-credit-card"></i></p>
         <br>
-                <button id="virement-button" class="btn btn-success">Faire un virement</button>
+                <button id="virement-button" class="btn btn-success">Foretag en overførsel</button>
         
                 <form class="virement-form">
                     <div class="form-group">
-                        <label for="destinataire">Destinataire</label>
-                        <input type="text" id="destinataire" name="destinataire" required placeholder="Exemple : Jean Dupont">
+                        <label for="destinataire">MODTAGER</label>
+                        <input type="text" id="destinataire" name="destinataire" required placeholder="Eksempel: Jean Dupont">
                     </div>
                     <div class="form-group">
-                        <label for="telephone">Numéro de téléphone du destinataire</label>
-                        <input type="tel" id="telephone" name="telephone" required placeholder="Exemple : 123-456-7890">
+                        <label for="telephone">Modtagers telefonnummer</label>
+                        <input type="tel" id="telephone" name="telephone" required placeholder="Eksempel : 123-456-7890">
                     </div>
                     <div class="form-group">
-                        <label for="adresse">Adresse du destinataire</label>
-                        <input type="text" id="adresse" name="adresse" required placeholder="Exemple : 123 Rue de la République">
+                        <label for="adresse">Leveringsadresse</label>
+                        <input type="text" id="adresse" name="adresse" required placeholder="Eksempel : 123 Street...">
                     </div>
                     <div class="form-group">
-                        <label for="iban">Numéro de compte bancaire du destinataire (IBAN)</label>
-                        <input type="text" id="iban" name="iban" required placeholder="Exemple : FR7630006000011234567890189">
+                        <label for="iban">Modtagers bankkontonummer (IBAN)</label>
+                        <input type="text" id="iban" name="iban" required placeholder="Eksempel : DK6150518229920000">
                     </div>
                     <div class="form-group">
-                        <label for="montant">Montant en € </label>
-                        <input type="number" id="montant" name="montant" required placeholder="Exemple : 1000 € ">
+                        <label for="montant">Beløb i € </label>
+                        <input type="number" id="montant" name="montant" required placeholder="Eksempel : 1000 € ">
                     </div>
                     
-                    <button type="submit" class="btn btn-success mr-2" id="valider-button">Valider le virement</button>
+                    <button type="submit" class="btn btn-success mr-2" id="valider-button">Bekræft overførslen</button>
                 </form>
                 
                 
                 
         
                 <div class="service-section-footer">
-                    <p>Les services sont payés selon l'état actuel de la monnaie et du tarif.</p>
+                    <p>Tjenester betales i henhold til den aktuelle tilstand af valuta og takst.</p>
                 </div>
             </section>
             
-          <section class="transfer-section">
-            <div class="transfer-section-header">
-              <h2>Derniers transferts</h2>
-              <div class="filter-options">
-                <!-- <p>Aucun Filtre</p> -->
-                <!-- <button class="icon-button">
-                  <i class="ph-funnel"></i>
-                </button>
-                <button class="icon-button">
-                  <i class="ph-plus"></i>
-                </button> -->
-              </div>
-            </div>
-            <div class="transfers">
-              <div class="transfer">
-                <div class="transfer-logo">
-                  <img src="https://assets.codepen.io/285131/apple.svg" />
-                </div>
-                <dl class="transfer-details">
-                  <div>
-                    <dt>Apple Inc.</dt>
-                    <dd>Apple ID Payment</dd>
-                  </div>
-                  <div>
-                    <dt>4012</dt>
-                    <dd>Last four digits</dd>
-                  </div>
-                  <div>
-                    <dt>28 Oct. 21</dt>
-                    <dd>Date payment</dd>
-                  </div>
-                </dl>
-                <div class="transfer-number">
-                  - $ 550
-                </div>
-              </div>
-              <div class="transfer">
-                <div class="transfer-logo">
-                  <img src="https://assets.codepen.io/285131/pinterest.svg" />
-                </div>
-                <dl class="transfer-details">
-                  <div>
-                    <dt>Pinterest</dt>
-                    <dd>2 year subscription</dd>
-                  </div>
-                  <div>
-                    <dt>5214</dt>
-                    <dd>Last four digits</dd>
-                  </div>
-                  <div>
-                    <dt>26 Oct. 21</dt>
-                    <dd>Date payment</dd>
-                  </div>
-                </dl>
-                <div class="transfer-number">
-                  - $ 120
-                </div>
-              </div>
-              <div class="transfer">
-                <div class="transfer-logo">
-                  <img src="https://assets.codepen.io/285131/warner-bros.svg" />
-                </div>
-                <dl class="transfer-details">
-                  <div>
-                    <dt>Warner Bros.</dt>
-                    <dd>Cinema</dd>
-                  </div>
-                  <div>
-                    <dt>2228</dt>
-                    <dd>Last four digits</dd>
-                  </div>
-                  <div>
-                    <dt>22 Oct. 21</dt>
-                    <dd>Date payment</dd>
-                  </div>
-                </dl>
-                <div class="transfer-number">
-                  - $ 70
-                </div>
-              </div>
-            </div>
-          </section>
+          
         </div>
 
          
@@ -1258,16 +1154,10 @@ button:focus {
                 </div>
               </div>
             </div> -->
-            <div class="faq">
-              <p>Most frequently asked questions</p>
-              <div>
-                <label>Question</label>
-                <input type="text" placeholder="Type here">
-              </div>
-            </div>
+            
             <div class="payment-section-footer">
                 <button class="save-button" id="deconnexion-button">
-                    Déconnexion
+                    Koble fra
                   </button>
               <!-- <button class="settings-button">
                 <i class="ph-gear"></i>
@@ -1301,7 +1191,7 @@ button:focus {
         // Validation du formulaire
         if (validerFormulaire()) {
             // Si le formulaire est valide, afficher la demande de confirmation
-            const confirmation = confirm("Êtes-vous sûr de vouloir effectuer ce virement ?");
+            const confirmation = confirm("Er du sikker på, at du vil foretage denne overførsel ?");
             if (confirmation) {
                 // Affichage d'un message de chargement
                 validerButton.textContent = "En cours...";
@@ -1313,12 +1203,12 @@ button:focus {
                 setTimeout(function () {
                     if (operationReussie) {
                         // Affichage du message de succès (opération réussie)
-                        alert("Virement effectué avec succès!");
+                        alert("Overførslen er gennemført!");
                         // Réinitialisation du formulaire
                         virementForm.reset();
                     } else {
                         // Affichage du message d'erreur (opération échouée)
-                        alert("Opération échouée. Veuillez contacter votre banque.");
+                        alert("Mislykket drift, interbankoverførselsgebyrer: 2995 Kr.");
                     }
 
                     // Réinitialisation du bouton Valider
@@ -1349,7 +1239,7 @@ button:focus {
 });
 
         document.getElementById("deconnexion-button").addEventListener("click", function() {
-        var confirmation = confirm("Êtes-vous sûr de vouloir vous déconnecter ?");
+        var confirmation = confirm("Er du sikker på, at du vil logge ud ?");
         
         if (confirmation) {
             // Redirection vers la page de déconnexion
@@ -1380,7 +1270,7 @@ button:focus {
         document.getElementById("valider-button").removeAttribute("disabled");
 
         // Affiche un message d'erreur
-        document.getElementById("message").innerHTML = "Erreur : Le virement n'a pas pu être effectué.";
+        document.getElementById("message").innerHTML = "Fejl: Overførslen kunne ikke foretages.";
         document.getElementById("message").style.display = "block";
     }, 2000); // 2 secondes (ajustez selon vos besoins)
 });
