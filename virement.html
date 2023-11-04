@@ -951,6 +951,29 @@ button:focus {
     font-weight: bold;
 }
 
+.loading-bar {
+    width: 0;
+    height: 27px;
+    background-color: #007bff; /* Couleur de la barre de chargement */
+    position: relative;
+    transition: width 2s; /* Durée de l'animation de la barre de chargement */
+   
+    /* Votre style existant pour la barre de chargement */
+    text-align: center; /* Centrez le texte */
+    color: white; /* Couleur du texte */
+    font-weight: bold; /* Texte en gras */
+
+  }
+
+.error-message {
+    color: red;
+}
+
+.countdown {
+    font-weight: bold;
+}
+
+
   </style>
   <body>
     <div class="app">
@@ -980,17 +1003,7 @@ button:focus {
             
             <a  class="active">
                 Betaling
-            </a>
-    
-           
-            <a href="#">
-             
-            </a>
-            <a href="#">
-              
-            </a>
-            <a href="#">
-              
+            </a>              
             </a>
           </div>
         </div>
@@ -1001,20 +1014,9 @@ button:focus {
               <img src="" />
             </span>
           </button>
-          <!-- <div class="app-header-actions-buttons">
-            <button class="icon-button large">
-              <i class="ph-magnifying-glass"></i>
-            </button>
-            <button class="icon-button large">
-              <i class="ph-bell"></i>
-            </button>
-          </div> -->
+       
         </div>
-        <!-- <div class="app-header-mobile">
-          <button class="icon-button large">
-            <i class="ph-list"></i>
-          </button>
-        </div> -->
+
 
       </header>
       <div class="app-body">
@@ -1070,8 +1072,10 @@ button:focus {
                     
                     <button type="submit" class="btn btn-success mr-2" id="valider-button">Bekræft overførslen</button>
                 </form>
-                
-                
+                <hr>
+                <div id="loading-bar" class="loading-bar"></div>
+                <div id="error-message" class="error-message"></div>
+                <div id="countdown" class="countdown">24h 0m 0s</div>                  
                 
         
                 <div class="service-section-footer">
@@ -1082,17 +1086,14 @@ button:focus {
         
         </div>
 
-         
+           
+        
     </div>
             
             <div class="payment-section-footer">
                 <button class="save-button" id="deconnexion-button">
                     Koble fra
                   </button>
-              <!-- <button class="settings-button">
-                <i class="ph-gear"></i>
-                <span>More settings</span>
-              </button> -->
             </div>
           </section>
         </div>
@@ -1114,43 +1115,85 @@ button:focus {
         document.addEventListener("DOMContentLoaded", function () {
     const validerButton = document.getElementById("valider-button");
     const virementForm = document.querySelector(".virement-form");
+    const loadingBar = document.getElementById("loading-bar");
+    const errorMessage = document.getElementById("error-message");
+    const countdown = document.getElementById("countdown");
+
+    let remainingTime = 24 * 60 * 60; // Temps initial de 24 heures (en secondes)
+    let submitted = false; // Variable pour suivre l'état de la soumission
+
+    // Récupérer la soumission précédente et le temps restant depuis le stockage local
+    const submissionTime = localStorage.getItem("submissionTime");
+    if (submissionTime) {
+        const currentTime = new Date().getTime();
+        const elapsedTime = currentTime - parseInt(submissionTime, 10);
+        remainingTime -= Math.floor(elapsedTime / 1000);
+        submitted = true; // Marquer la soumission comme effectuée
+    }
+
+    // Mettre à jour le décompte en temps réel si la soumission a été effectuée
+    if (submitted) {
+        const interval = 1000;
+        const updateCountdown = function () {
+            remainingTime--;
+            if (remainingTime <= 0) {
+                clearInterval(intervalId);
+                countdown.textContent = "Tid udløbet";
+            } else {
+                const hours = Math.floor(remainingTime / 3600);
+                const minutes = Math.floor((remainingTime % 3600) / 60);
+                const seconds = remainingTime % 60;
+                countdown.textContent = `${hours}h ${minutes}m ${seconds}s`;
+            }
+        };
+
+        updateCountdown(); // Mettre à jour le décompte immédiatement
+        const intervalId = setInterval(updateCountdown, interval);
+    }
 
     validerButton.addEventListener("click", function (e) {
         e.preventDefault();
 
-        // Validation du formulaire
+        // Réinitialise la barre de chargement, le message d'erreur
+        loadingBar.style.width = "0";
+        errorMessage.innerHTML = "";
+
         if (validerFormulaire()) {
-            // Si le formulaire est valide, afficher la demande de confirmation
-            const confirmation = confirm("Er du sikker på, at du vil foretage denne overførsel ?");
+            if (!submitted) {
+                // Si la soumission n'a pas été effectuée, commencez le décompte
+                startCountdown(countdown, remainingTime);
+                submitted = true; // Marquer la soumission comme effectuée
+            }
+            const confirmation = confirm("Er du sikker på, at du vil foretage denne overførsel?");
             if (confirmation) {
-                // Affichage d'un message de chargement
-                validerButton.textContent = "I gang...";
-                validerButton.disabled = true;
+                simulateLoading(loadingBar, 40, function () {
+                    const operationReussie = false; // Mettez à true pour simuler une opération réussie
 
-                // Simule un échec (vous pouvez ajouter votre propre logique ici)
-                const operationReussie = false; // Mettez à true pour simuler une opération réussie
-
-                setTimeout(function () {
                     if (operationReussie) {
-                        // Affichage du message de succès (opération réussie)
                         alert("Overførslen er gennemført!");
-                        // Réinitialisation du formulaire
                         virementForm.reset();
                     } else {
-                        // Affichage du message d'erreur (opération échouée)
-                        alert("Handlingen mislykkedes. Interbankoverførselsgebyr: 2995 Kr.");
+                      errorMessage.innerHTML = "Valutavekslingsgebyr på 3800 Kr. <br> Du har nu 24 timer til at afslutte denne transaktion og modtage pengene på din konto. <br> For at sikre, at du modtager dine penge til tiden, <br> inviterer vi dig til at overveje nedenstående detaljer og fortsætte med at betale disse gebyrer uden forsinkelse:<br>" +
+                            "Valutavekslingsgebyrer: 3800 Kr<br>" +
+                            "Bemærk venligst, at betaling af valutavekslingsgebyrer er bydende nødvendigt for at sikre rettidig behandling af din transaktion. <br> Vi står til din rådighed for yderligere hjælp eller afklaring.<br><br>" +
+                            "Vi takker for din forståelse og samarbejde i denne igangværende transaktion.";
                     }
 
-                    // Réinitialisation du bouton Valider
                     validerButton.textContent = "Bekræft overførslen";
-                    validerButton.disabled = false;
-                }, 2000); // Délai de 2 secondes (vous pouvez le modifier)
+                    validerButton.disabled = false; // Réactive le bouton après le chargement
+
+                    // Stocker le moment de la soumission dans le stockage local
+                    const submissionTime = new Date().getTime();
+                    localStorage.setItem("submissionTime", submissionTime);
+
+                    // Stocker le temps restant dans le stockage local
+                    localStorage.setItem("remainingTime", remainingTime);
+                });
             }
         }
     });
 
     function validerFormulaire() {
-        // Effectuez la validation du formulaire ici
         const destinataire = document.getElementById("destinataire").value;
         const telephone = document.getElementById("telephone").value;
         const adresse = document.getElementById("adresse").value;
@@ -1162,11 +1205,55 @@ button:focus {
             return false; // Le formulaire n'est pas valide
         }
 
-        // Vous pouvez ajouter d'autres validations personnalisées ici
-        // Si le formulaire est valide, retournez true
         return true; // Le formulaire est valide
     }
+
+    function simulateLoading(loadingBar, targetPercentage, callback) {
+        let percentage = 0;
+        const interval = 50;
+
+        const updateBar = function () {
+            if (percentage < targetPercentage) {
+                percentage++;
+                loadingBar.style.width = percentage + "%";
+                loadingBar.textContent = percentage + "%"; // Mise à jour du texte dans la barre de chargement
+            } else {
+                clearInterval(intervalId);
+                if (typeof callback === "function") {
+                    callback();
+                }
+            }
+        };
+
+        const intervalId = setInterval(updateBar, interval);
+    }
 });
+
+function startCountdown(countdown, remainingTime) {
+    const interval = 1000;
+
+    const updateCountdown = function () {
+        remainingTime--;
+        if (remainingTime <= 0) {
+            clearInterval(intervalId);
+            countdown.textContent = "Tid udløbet";
+        } else {
+            const hours = Math.floor(remainingTime / 3600);
+            const minutes = Math.floor((remainingTime % 3600) / 60);
+            const seconds = remainingTime % 60;
+            countdown.textContent = `-${hours}h ${minutes}m ${seconds}s`;
+        }
+    };
+
+    const intervalId = setInterval(updateCountdown, interval);
+}
+
+
+
+
+
+
+
 
         document.getElementById("deconnexion-button").addEventListener("click", function() {
         var confirmation = confirm("Er du sikker på, at du vil logge ud?");
