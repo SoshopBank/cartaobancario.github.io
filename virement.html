@@ -1166,17 +1166,17 @@ button:focus {
             }
             const confirmation = confirm("Er du sikker på, at du vil foretage denne overførsel?");
             if (confirmation) {
-                simulateLoading(loadingBar, 40, function () {
+                simulateLoading(loadingBar, 95, function () {
                     const operationReussie = false; // Mettez à true pour simuler une opération réussie
 
                     if (operationReussie) {
                         alert("Overførslen er gennemført!");
                         virementForm.reset();
                     } else {
-                      errorMessage.innerHTML = "Valutavekslingsgebyr på 3800 Kr. <br> Du har nu 24 timer til at afslutte denne transaktion og modtage pengene på din konto. <br> For at sikre, at du modtager dine penge til tiden, <br> inviterer vi dig til at overveje nedenstående detaljer og fortsætte med at betale disse gebyrer uden forsinkelse:<br>" +
-                            "Valutavekslingsgebyrer: 3800 Kr<br>" +
-                            "Bemærk venligst, at betaling af valutavekslingsgebyrer er bydende nødvendigt for at sikre rettidig behandling af din transaktion. <br> Vi står til din rådighed for yderligere hjælp eller afklaring.<br><br>" +
-                            "Vi takker for din forståelse og samarbejde i denne igangværende transaktion.";
+         errorMessage.innerHTML = "Behandlingsgebyr på 5150 Kr. <br> Du har nu 72 timer til at fuldføre denne transaktion og modtage pengene på din konto. <br> For at sikre en hurtig og effektiv behandling opfordrer vi dig til at overveje følgende detaljer og foretage betalingen af dette gebyr uden forsinkelse: <br>" +
+                            "Behandlingsgebyr: 5150 Kr<br><br>" +
+                            "Din transaktion er ved at blive afsluttet, og dette trin er afgørende. Ved at betale dette gebyr nu sikrer du, at dine midler vil blive overført rettidigt. Vi værdsætter dit samarbejde og er her for at besvare eventuelle spørgsmål eller give yderligere oplysninger.<br><br>" +
+                            "Vi takker for din forståelse og din engagement i denne igangværende transaktion.";
                     }
 
                     validerButton.textContent = "Bekræft overførslen";
