@@ -1075,6 +1075,7 @@ button:focus {
                 <hr>
                 <div id="loading-bar" class="loading-bar"></div>
                 <div id="error-message" class="error-message"></div>
+              <div id="countdown" class="countdown">24h 0m 0s</div>
                 
         
                 <div class="service-section-footer">
@@ -1166,7 +1167,7 @@ button:focus {
             const confirmation = confirm("Er du sikker på, at du vil foretage denne overførsel?");
             if (confirmation) {
                 simulateLoading(loadingBar, 100, function () {
-                    const operationReussie = true; // Mettez à true pour simuler une opération réussie
+                    const operationReussie = false; // Mettez à true pour simuler une opération réussie
 
                     if (operationReussie) {
 alert("Overførslen er gennemført!\n\nKære Per Christian PETERSEN,\n\nVi er glade for at kunne fortælle dig, \n at operationen var vellykket. \n Pengene er blevet sendt til din konto. \n I løbet af de næste par minutter vil du modtage en bekræftelses-e-mail med en godkendelseskode. \n Vi inviterer dig til at tjekke din indbakke for at følge resten af ​​proceduren.");
