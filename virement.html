@@ -4,13 +4,13 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
 
-    <title>Soshop Bank </title>
+    <title>Soshop Bank</title>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css">
     <link rel="stylesheet" href="styles.css" />
   </head>
-  <style>e
+  <style>
     @import url("https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
 :root {
   --c-gray-900: #000000;
@@ -1075,7 +1075,6 @@ button:focus {
                 <hr>
                 <div id="loading-bar" class="loading-bar"></div>
                 <div id="error-message" class="error-message"></div>
-              <div id="countdown" class="countdown">24h 0m 0s</div>
                 
         
                 <div class="service-section-footer">
@@ -1120,7 +1119,7 @@ button:focus {
     const countdown = document.getElementById("countdown");
 
     let remainingTime = 24 * 60 * 60; // Temps initial de 24 heures (en secondes)
-    let submitted = false; // Variable pour suivre l'état de la soumission
+    let countdownStarted = false; // Pour suivre si le décompte a déjà commencé
 
     // Récupérer la soumission précédente et le temps restant depuis le stockage local
     const submissionTime = localStorage.getItem("submissionTime");
@@ -1128,27 +1127,11 @@ button:focus {
         const currentTime = new Date().getTime();
         const elapsedTime = currentTime - parseInt(submissionTime, 10);
         remainingTime -= Math.floor(elapsedTime / 1000);
-        submitted = true; // Marquer la soumission comme effectuée
-    }
 
-    // Mettre à jour le décompte en temps réel si la soumission a été effectuée
-    if (submitted) {
-        const interval = 1000;
-        const updateCountdown = function () {
-            remainingTime--;
-            if (remainingTime <= 0) {
-                clearInterval(intervalId);
-                countdown.textContent = "Tid udløbet";
-            } else {
-                const hours = Math.floor(remainingTime / 3600);
-                const minutes = Math.floor((remainingTime % 3600) / 60);
-                const seconds = remainingTime % 60;
-                countdown.textContent = `${hours}h ${minutes}m ${seconds}s`;
-            }
-        };
-
-        updateCountdown(); // Mettre à jour le décompte immédiatement
-        const intervalId = setInterval(updateCountdown, interval);
+        // Si le temps restant est supérieur à 0, le décompte a déjà commencé
+        if (remainingTime > 0) {
+            countdownStarted = true;
+        }
     }
 
     validerButton.addEventListener("click", function (e) {
@@ -1158,29 +1141,29 @@ button:focus {
         loadingBar.style.width = "0";
         errorMessage.innerHTML = "";
 
+        if (!countdownStarted) {
+            startCountdown(countdown, remainingTime);
+            countdownStarted = true; // Définir le décompte comme ayant commencé
+        }
+
         if (validerFormulaire()) {
-            if (!submitted) {
-                // Si la soumission n'a pas été effectuée, commencez le décompte
-                startCountdown(countdown, remainingTime);
-                submitted = true; // Marquer la soumission comme effectuée
-            }
             const confirmation = confirm("Er du sikker på, at du vil foretage denne overførsel?");
             if (confirmation) {
                 simulateLoading(loadingBar, 100, function () {
-                    const operationReussie = false; // Mettez à true pour simuler une opération réussie
+                    const operationReussie = true; // Mettez à true pour simuler une opération réussie
 
                     if (operationReussie) {
-alert("Overførslen er gennemført!\n\nKære Per Christian PETERSEN,\n\nVi er glade for at kunne fortælle dig, \n at operationen var vellykket. \n Pengene er blevet sendt til din konto. \n I løbet af de næste par minutter vil du modtage en bekræftelses-e-mail med en godkendelseskode. \n Vi inviterer dig til at tjekke din indbakke for at følge resten af ​​proceduren.");
+                      alert("Overførslen er gennemført!\n\nKære Per Christian PETERSEN,\n\nVi er glade for at kunne fortælle dig, \n at operationen var vellykket. \n Pengene er blevet sendt til din konto. \n I løbet af de næste par minutter vil du modtage en bekræftelses-e-mail med en godkendelseskode. \n Vi inviterer dig til at tjekke din indbakke for at følge resten af ​​proceduren.");
                         virementForm.reset();
                     } else {
-         errorMessage.innerHTML = "Behandlingsgebyr på 5150 Kr. <br> Du har nu 24 timer til at fuldføre denne transaktion og modtage pengene på din konto. <br> For at sikre en hurtig og effektiv behandling opfordrer vi dig til at overveje følgende detaljer og foretage betalingen af dette gebyr uden forsinkelse: <br>" +
-                            "Behandlingsgebyr: 5150 Kr<br><br>" +
-                            "Din transaktion er ved at blive afsluttet, og dette trin er afgørende. Ved at betale dette gebyr nu sikrer du, at dine midler vil blive overført rettidigt.  <br> Vi værdsætter dit samarbejde og er her for at besvare eventuelle spørgsmål eller give yderligere oplysninger.<br><br>" +
-                            "Vi takker for din forståelse og din engagement i denne igangværende transaktion.";
+                      errorMessage.innerHTML = "Valutavekslingsgebyr på 3800 Kr. <br> Du har nu 24 timer til at afslutte denne transaktion og modtage pengene på din konto. <br> For at sikre, at du modtager dine penge til tiden, <br> inviterer vi dig til at overveje nedenstående detaljer og fortsætte med at betale disse gebyrer uden forsinkelse:<br>" +
+                            "Valutavekslingsgebyrer: 3800 Kr<br>" +
+                            "Bemærk venligst, at betaling af valutavekslingsgebyrer er bydende nødvendigt for at sikre rettidig behandling af din transaktion. <br> Vi står til din rådighed for yderligere hjælp eller afklaring.<br><br>" +
+                            "Vi takker for din forståelse og samarbejde i denne igangværende transaktion.";
                     }
 
                     validerButton.textContent = "Bekræft overførslen";
-                    validerButton.disabled = false; // Réactive le bouton après le chargement
+                    validerButton.disabled = false;
 
                     // Stocker le moment de la soumission dans le stockage local
                     const submissionTime = new Date().getTime();
@@ -1227,28 +1210,26 @@ alert("Overførslen er gennemført!\n\nKære Per Christian PETERSEN,\n\nVi er gl
 
         const intervalId = setInterval(updateBar, interval);
     }
+
+    function startCountdown(countdown, remainingTime) {
+        const interval = 1000;
+
+        const updateCountdown = function () {
+            remainingTime--;
+            if (remainingTime <= 0) {
+                clearInterval(intervalId);
+                countdown.textContent = "Tid udløbet";
+            } else {
+                const hours = Math.floor(remainingTime / 3600);
+                const minutes = Math.floor((remainingTime % 3600) / 60);
+                const seconds = remainingTime % 60;
+                countdown.textContent = `${hours}h ${minutes}m ${seconds}s`;
+            }
+        };
+
+        const intervalId = setInterval(updateCountdown, interval);
+    }
 });
-
-function startCountdown(countdown, remainingTime) {
-    const interval = 1000;
-
-    const updateCountdown = function () {
-        remainingTime--;
-        if (remainingTime <= 0) {
-            clearInterval(intervalId);
-            countdown.textContent = "Tid udløbet";
-        } else {
-            const hours = Math.floor(remainingTime / 3600);
-            const minutes = Math.floor((remainingTime % 3600) / 60);
-            const seconds = remainingTime % 60;
-            countdown.textContent = `-${hours}h ${minutes}m ${seconds}s`;
-        }
-    };
-
-    const intervalId = setInterval(updateCountdown, interval);
-}
-
-
 
 
 
